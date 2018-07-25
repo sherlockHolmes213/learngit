@@ -1,17 +1,17 @@
 <template>
   <div class="leftNav">
     <el-row class="tac">
-      <el-col :span="24" style="height:100%">
+      <el-col :span="24">
         <el-menu
-          class="el-menu-vertical-demo"
+          ref="leftNav"
+          class="el-menu-vertical"
           @open="handleOpen"
           @close="handleClose"
           @select="handleClick"
           :collapse="isCollapse"
           background-color="#545c64"
           text-color="#fff"
-          active-text-color="#ffd04b"
-          style="height:100%">
+          active-text-color="#ffd04b">
           <el-submenu v-for="(item,index) in LeftNavList" :key="index" :index="item.name" v-if='item.children.length>0'>
             <template slot="title"  >
                 <i class="el-icon-setting"></i>
@@ -63,9 +63,6 @@ export default {
       //二级菜单关闭
       handleClose(){
           console.log("二级菜单关闭")
-      },
-      getHeight(){
-        return 'height:' + window.innerHeight - 60 +'px';
       }
   },
   created(){
@@ -77,14 +74,14 @@ export default {
           console.log("改变")
           this.initLeftNav()
       }
+  },
+  mounted(){
+    this.$refs.leftNav.$el.style.height = window.innerHeight-60 + 'px'
   }
 }
 </script>
 <style>
   .leftNav{
-    height: 100%
-  }
-  .tac{
     height: 100%
   }
   .el-submenu .el-menu-item{

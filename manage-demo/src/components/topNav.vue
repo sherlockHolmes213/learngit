@@ -1,8 +1,8 @@
 <template>
   <div class="topNav">
     <el-row>
-      <el-col :span="3">
-        11111
+      <el-col :span="3" class="logoImg">
+        <img src="/static/logo.png" alt="">
       </el-col>
       <el-col :span="16">
           <el-menu class="el-menu-demo topNavBar" mode="horizontal" @select="handleSelect" background-color="#545c64"
@@ -47,6 +47,7 @@ export default {
     },
     loginOut(){
       sessionStorage.removeItem('loginState')
+      this.$router.push('/login')
     },
     handleCommand(command){
       if(command=='loginOut'){
@@ -77,6 +78,13 @@ export default {
     height: 40px;
     border-radius: 50%;
     margin-top: 10px
+  }
+  .logoImg{
+    text-align: center;
+  }
+  .logoImg img{
+    height: 50px;
+    margin-top: 5px
   }
   .el-menu--horizontal{
     border-bottom: 0

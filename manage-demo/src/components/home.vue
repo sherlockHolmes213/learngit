@@ -10,7 +10,7 @@
     </el-row>
     <el-row>
       <el-col :span="3">
-        <div class="grid-content bg-purple">
+        <div class="grid-content bg-purple leftNav">
           <!-- <router-view name="leftNav"/> -->
           <leftNav></leftNav>
         </div>
@@ -42,4 +42,7 @@ export default {
   }
 }
 </script>
+<style>
+</style>
+
 

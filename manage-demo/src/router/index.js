@@ -9,7 +9,22 @@ import HomeOne from '@/view/pages/home/homeOne'  //主页分级
 import MySet from '@/view/pages/mySet/mySet'  //我的设置
 import MySetOne from '@/view/pages/mySet/mySetOne'  //我的设置
 import MySetSecond from '@/view/pages/mySet/mySetSecond'  //我的设置
-import MyRule from '@/view/pages/MyRule/MyRule'  //我的规则
+import MyRule from '@/view/pages/rule/MyRule'  //我的规则
+
+//视图
+//告警视图
+import AlarmTreeSpacity from '@/view/pages/show/alarmShow/alarmTreeSpacity' //专业告警树
+import AlarmTreeArea from '@/view/pages/show/alarmShow/alarmTreeArea' //区域告警树
+import AlarmList from '@/view/pages/show/alarmShow/alarmList' //告警列表
+import AlarmShowManager from '@/view/pages/show/alarmShow/alarmShowManager' //告警管理
+
+
+//规则
+//抑制派单
+import OrderAdd from '@/view/pages/rule/orders/orderAdd' //派单添加
+import OrderHistory from '@/view/pages/rule/orders/orderHistory' //规则历史
+import OrderApprove from '@/view/pages/rule/orders/orderApprove' //规则审批
+import OrderList from '@/view/pages/rule/orders/orderList' //规则列表
 
 
 Vue.use(Router)
@@ -22,13 +37,30 @@ export default new Router({
       name:'首页',
     },
     {
-      path:'/mySet',
-      name:'我的设置',
+      path:'/show',
+      name:'视图',
     },
     {
-      path:'/myRule',
-      name:'我的规则'
+      path:'/rule',
+      name:'规则'
+    },
+    {
+      path:'/orders',
+      name:'派单'
+    },
+    {
+      path:'/resource',
+      name:'资源'
+    },
+    {
+      path:'/system',
+      name:'系统'
+    },
+    {
+      path:'/quality',
+      name:'质量'
     }
+    
   ],
   // routes: [
   //   {
@@ -103,34 +135,96 @@ export default new Router({
           children:[]
         },
         {
-          path:'/mySet',
-          name:'我的配置',
+          path:'/show',
+          name:'告警视图',
           component:HomeTwo,
           children:[
             {
-              path:'/mySet',
-              name:'我的配置',
+              path:'/alarmList',
+              name:'告警列表',
               components:{
-                default:MySetOne,
+                default:AlarmList,
               },
             },
             {
-              path:'/mySetTwo',
-              name:'我的配置2',
+              path:'/alarmTreeSpacity',
+              name:'专业告警树',
               components:{
-                default:MySetSecond,
+                default:AlarmTreeSpacity,
+              },
+              children:[]
+            },
+            {
+              path:'/alarmTreeArea',
+              name:'区域告警树',
+              components:{
+                default:AlarmTreeArea,
+              },
+              children:[]
+            },
+            {
+              path:'/alarmShowManager',
+              name:'告警视图管理',
+              components:{
+                default:AlarmShowManager,
               },
               children:[]
             }
           ]
         },
         {
-          path:'/myRule',
-          name:'我的规则',
-          components:{
-            default:MyRule,
-          },
-          children:[]
+          path:'/rule',
+          name:'抑制派单',
+          component:HomeTwo,
+          children:[
+            {
+              path:'/orderAdd',
+              name:'抑制派单添加',
+              components:{
+                default:OrderAdd,
+              },
+              children:[]
+            },
+            {
+              path:'/orderList',
+              name:'规则列表',
+              components:{
+                default:OrderList,
+              },
+              children:[]
+            },
+            {
+              path:'/orderApprove',
+              name:'规则审批',
+              components:{
+                default:OrderApprove,
+              },
+              children:[]
+            },
+            {
+              path:'/orderHistory',
+              name:'规则历史',
+              components:{
+                default:OrderHistory,
+              },
+              children:[]
+            }
+          ]
+        },
+        {
+          path:'/rule',
+          name:'工程预约',
+          component:HomeTwo,
+          children:[
+            {
+              path:'/orderAdd',
+              name:'抑制派单添加',
+              components:{
+                default:MySetSecond,
+              },
+              children:[]
+            }
+          ]
         }
       ]
     },

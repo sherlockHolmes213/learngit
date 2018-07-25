@@ -15,6 +15,12 @@ Vue.use(Vuex)
 import store from './store/store'
 
 
+//引入axios
+import api from './fetch/api.js'
+Vue.prototype.$api = api;
+Vue.use(api)
+
+
 Vue.config.productionTip = false
 
 
