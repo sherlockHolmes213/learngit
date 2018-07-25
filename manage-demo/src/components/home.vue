@@ -15,7 +15,7 @@
           <leftNav></leftNav>
         </div>
      </el-col>
-      <el-col :span="21">
+      <el-col :span="21" style="padding:15px">
         <div class="grid-content bg-purple-light">
           <router-view/>
         </div>
