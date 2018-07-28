@@ -14,12 +14,12 @@
           </div>
           <div class="transBoxContent">
             <ul>
-              <li v-for="(item,index) in source" :key="item.id"><input type="checkbox" @click="setSourceCheckedData(item)" :checked='item.checked'>{{item.label}}</li>
+              <li v-for="(item,index) in source" :key="item.id"><input type="checkbox" @click="setSourceCheckedData(item,$event)" ref="sourceList">{{item.label}}</li>
             </ul>
           </div>
         </div>
         <div class="transBoxBottom">
-          刷新
+          刷新11
         </div>
       </el-col>
       <el-col :span="2" class="transBoxAction">
@@ -28,7 +28,7 @@
       </el-col>
       <el-col :span="5" class="transBoxTarget">
         <div class="transBoxTitle">
-          <input type="checkbox">{{targetTitle}}
+          <input type="checkbox" @click="targetAllChecked">{{targetTitle}}
           <span style="float:right">{{target.length}}</span>
         </div>
         <div>
@@ -36,8 +36,8 @@
             <input type="text" placeholder="请输入关键字进行搜索">
           </div>
           <div class="transBoxContent">
-            <ul>
-              <li v-for="(item,index) in target" :key="item.id"><input type="checkbox">{{item.label}}</li>
+            <ul >
+              <li v-for="(item,index) in target" :key="item.id"><input type="checkbox" @click="setTargetCheckedData(item,$event)"  ref="targetList">{{item.label}}</li>
             </ul>
           </div>
         </div>
@@ -57,26 +57,23 @@ export default {
       msg: 'Welcome to Your Vue.js App',
       sourceTitle:"源数据",
       targetTitle:"目标数据",
+      isChecked:false,
       source:[
         {
           'label':'数据一',
           'id':1,
-          'checked':false
         },
         {
           'label':'数据二',
           'id':2,
-          'checked':false
         },
         {
           'label':'数据三',
           'id':3,
-          'checked':false
         },
         {
           'label':'数据四',
           'id':4,
-          'checked':false
         }
       ],
       target:[
@@ -85,50 +82,103 @@ export default {
           'id':5
         }
       ],
-      sourceCheckedData:[]
+      sourceCheckedData:[],  //选中的源数据
+      targetCheckedData:[],  //选中的目标数据
     }
   },
   methods:{
-    setSourceCheckedData(data){
-      this.sourceCheckedData.push(data)
-      console.log(this.sourceCheckedData)
+    setSourceCheckedData(data,event){
+      debugger
+      let el = event.currentTarget
+      if(el.checked){
+        this.sourceCheckedData.push(data)
+      }else{
+        this.sourceCheckedData.forEach((value,index)=>{
+          if(value.id == data.id){
+            this.sourceCheckedData.splice(index,1)
+          }
+        })
+      }
+      // debugger
+      // data.checked = !data.checked
+      //this.source = this.source.slice(0)
+      //this.sourceCheckedData.push(data)
+      // console.log(this.sourceCheckedData)
     },
-    //选中数据添加至源数据
-    setSource(){
-      console.log("添加至源数据")
+    setTargetCheckedData(data,event){
+      
+      this.targetCheckedData.push(data)
     },
     //选中数据添加至目标数据
     setTarget(){
-      debugger
       this.source = this.mergeArray(this.source,this.sourceCheckedData)
       this.target = this.target.concat(this.sourceCheckedData)
       this.sourceCheckedData = []
       console.log("添加至目标数据")
     },
+    //选中数据添加至源数据
+    setSource(){
+      this.target = this.mergeArray(this.target,this.targetCheckedData)
+      this.source = this.source.concat(this.targetCheckedData)
+      this.targetCheckedData = []
+    },
     //数组去重
     mergeArray:function (arr1, arr2){ 
       //去重一
+      debugger
+      let temp = []
+      // temp.splice(1,1)
+      // console.log("temp:",temp)
+      // console.log("arr1:",arr1)
       for (var i = 0 ; i < arr1.length ; i ++ ){
         for(var j = 0 ; j < arr2.length ; j ++ ){
           if (arr1[i] === arr2[j]){
-          arr1.splice(i,1); //利用splice函数删除元素，从第i个位置，截取长度为1的元素
+            // debugger
+            // arr1.splice(i,1); //利用splice函数删除元素，从第i个位置，截取长度为1的元素
+            temp.push(i)
           }
         }
       }
+
+      let sortNumber = function(a,b){
+        return b-a
+      }
+      temp.sort(sortNumber)
+      temp.forEach((value)=>{
+        arr1.splice(value,1)
+      })
       return arr1;
     },
     //源数据全选
     sourceAllChecked(){
-      console.log("全选")
-      this.source.forEach((value)=>{
-        value.checked = !value.checked
+      console.log("全选源数据")
+      this.$refs.sourceList.forEach((el)=>{
+        el.checked = !el.checked
       })
-      this.source = Object.assign({},this.source)
+      // this.source.forEach((value)=>{
+      //   value.checked = !value.checked
+      // })
+      this.sourceCheckedData = this.source
+      // debugger
+      // this.source = Object.assign({},this.source)
+      this.source = this.source.slice(0)
+    },
+    //目标数据全选
+    targetAllChecked(){
+      console.log("全选目标数据")
+      this.$refs.targetList.forEach((el)=>{
+        el.checked = !el.checked
+      })
+      this.targetCheckedData = this.target
+      this.target = this.target.slice(0)
     }
   },
   watch:{
     'source':function(){
-      console.log("该表")
+      // this.source.forEach((value)=>{
+      //   if(value.checked)
+      // })
+      console.log("改变")
     }
   }
 }
