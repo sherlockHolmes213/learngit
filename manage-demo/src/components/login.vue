@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+      <canvas id="c_n9" width="1920" height="990" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas>
       <el-row class="loginModal">
           <el-col :span="8" :offset="8">
               <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -20,8 +21,9 @@
 </template>
 
 <script>
+import canvas from '../common/canvasA'
 export default {
-  name: 'mySetOne',
+  name: 'mySetOne', 
   data () {
     return {
       msg: 'Welcome to Your Vue.js mySetOne',

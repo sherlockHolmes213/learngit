@@ -29,6 +29,7 @@ router.beforeEach((to, from, next) => {
   if(to.path == '/login'){
     next()
   }else{
+    debugger
     if(to.meta.arequiresAuth && sessionStorage.getItem('loginState')!=1){
       next({path:'/login'})
     }else{

@@ -4,7 +4,7 @@
     <el-row class="transBox" type="flex" align="middle">
       <el-col :span="5" class="transSourceBox">
         <div class="transBoxTitle">
-          <input type="checkbox" @click="sourceAllChecked">{{sourceTitle}}
+          <input type="checkbox" @click="sourceAllChecked" ref="sourceCheckBox">{{sourceTitle}}
 
           <span style="float:right">{{source.length}}</span>
         </div>
@@ -18,7 +18,7 @@
             </ul>
           </div>
         </div>
-        <div class="transBoxBottom">
+        <div class="transBoxBottom" v-if=0>
           刷新11
         </div>
       </el-col>
@@ -28,7 +28,7 @@
       </el-col>
       <el-col :span="5" class="transBoxTarget">
         <div class="transBoxTitle">
-          <input type="checkbox" @click="targetAllChecked">{{targetTitle}}
+          <input type="checkbox" @click="targetAllChecked" ref="targetCheckBox">{{targetTitle}}
           <span style="float:right">{{target.length}}</span>
         </div>
         <div>
@@ -41,7 +41,7 @@
             </ul>
           </div>
         </div>
-        <div class="transBoxBottom">
+        <div class="transBoxBottom" v-if=0>
           刷新
         </div>
       </el-col>
@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import store from '@/store/store.js'
 export default {
   name: 'homeOne',
   data () {
@@ -88,7 +89,6 @@ export default {
   },
   methods:{
     setSourceCheckedData(data,event){
-      debugger
       let el = event.currentTarget
       if(el.checked){
         this.sourceCheckedData.push(data)
@@ -111,6 +111,8 @@ export default {
     },
     //选中数据添加至目标数据
     setTarget(){
+      this.$refs.sourceCheckBox.checked = false
+      this.$refs.targetCheckBox.checked = false
       this.source = this.mergeArray(this.source,this.sourceCheckedData)
       this.target = this.target.concat(this.sourceCheckedData)
       this.sourceCheckedData = []
@@ -118,6 +120,8 @@ export default {
     },
     //选中数据添加至源数据
     setSource(){
+      this.$refs.sourceCheckBox.checked = false
+      this.$refs.targetCheckBox.checked = false
       this.target = this.mergeArray(this.target,this.targetCheckedData)
       this.source = this.source.concat(this.targetCheckedData)
       this.targetCheckedData = []
@@ -125,7 +129,6 @@ export default {
     //数组去重
     mergeArray:function (arr1, arr2){ 
       //去重一
-      debugger
       let temp = []
       // temp.splice(1,1)
       // console.log("temp:",temp)
@@ -151,6 +154,8 @@ export default {
     },
     //源数据全选
     sourceAllChecked(){
+      store
+      debugger
       console.log("全选源数据")
       this.$refs.sourceList.forEach((el)=>{
         el.checked = !el.checked
