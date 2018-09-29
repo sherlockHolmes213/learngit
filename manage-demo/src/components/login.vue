@@ -43,9 +43,17 @@ export default {
       submitForm:function(name){
           this.$refs[name].validate((valid) => {
             if(valid){
-                console.log('登录成功')
-                sessionStorage.setItem('loginState','1')
-                this.$router.push('/')
+                // 192.168.0.107:9096
+                // 58.87.110.60:9096
+                // http://58.87.110.60:9096/mc/sys/login/login
+                // this.$api.get('http://localhost:8080/mc/sys/login/login',{telephone:'18904390196',passwd:'Hcycom@123'},res=>{
+                   console.log('登录成功')
+                    sessionStorage.setItem('loginState','1')
+                    this.$router.push('/')
+                // })
+                // console.log('登录成功')
+                // sessionStorage.setItem('loginState','1')
+                // this.$router.push('/')
             }else{
                 console.log('登录失败')
             }
