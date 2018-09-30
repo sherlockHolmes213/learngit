@@ -10,6 +10,7 @@ import MySet from '@/view/pages/mySet/mySet'  //我的设置
 import MySetOne from '@/view/pages/mySet/mySetOne'  //我的设置
 import MySetSecond from '@/view/pages/mySet/mySetSecond'  //我的设置
 import MyRule from '@/view/pages/rule/MyRule'  //我的规则
+import WebSocket from '@/view/pages/home/WebSocket'  // websocket
 
 //视图
 //告警视图
@@ -130,7 +131,7 @@ export default new Router({
             arequiresAuth:true,
           },
           components:{
-            default:HomeOne,
+            default:WebSocket,
           },
           children:[]
         },
