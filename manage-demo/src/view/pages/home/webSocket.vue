@@ -27,7 +27,7 @@ export default {
       //   console.log('Connection to server opened');
       // }
       this.wkConnection.onmessage = function (e) {
-          console.log(e.data);
+          console.log(e.data,"dsafa ");
       };
     },
     initWebSocket(){ //初始化weosocket 
@@ -39,13 +39,12 @@ export default {
       this.wkConnection.onclose = this.websocketclose;
         }, 
     websocketonopen() {
-      console.log("WebSocket连接成功");
+      console.log("客户端一连接成功");
     },
     websocketonerror(e) { //错误
       console.log("WebSocket连接发生错误");
     },
     websocketonmessage(e){ //数据接收 
-    debugger
       const redata = e.data;
       this.msgRec.push(redata)
     　//注意：长连接我们是后台直接1秒推送一条数据， 
