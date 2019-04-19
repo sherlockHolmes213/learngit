@@ -10,10 +10,12 @@
                 <el-form-item label="登录密码" prop="password">
                     <el-input v-model="ruleForm.password" type="password"></el-input>
                 </el-form-item>
+                <el-form-item label="确认密码" prop="passwordSure">
+                    <el-input v-model="ruleForm.passwordSure" type="password"></el-input>
+                </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+                    <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
                     <el-button @click="resetForm('ruleForm')">重置</el-button>
-                    <el-button @click="signUp">注册</el-button>
                 </el-form-item>
             </el-form>
           </el-col>
@@ -28,49 +30,44 @@ export default {
   name: 'mySetOne', 
   data () {
     return {
-      urls:URLS.inhibiUrl,
-      ruleForm:{
-          name:'',
-          password:''
-      },
-      rules:{
-          name:[
-              {required:true,message:'请输入用户名',trigger: 'blur'},
-              {min:5,max:12,message:'用户名格式不正确',trigger: 'blur'}
+        urls:URLS.inhibiUrl,
+        ruleForm:{
+            name:'',
+            password:'',
+            passwordSure:""
+        },
+        rules:{
+            name:[
+                {required:true,message:'请输入用户名',trigger: 'blur'},
+                {min:5,max:12,message:'用户名格式不正确',trigger: 'blur'}
+            ],
+            password:[
+                {required:true,message:'请输入密码',trigger: 'blur'},
+                {min:5,max:12,message:'密码不正确',trigger: 'blur'}
+            ],
+            passwordSure:[
+              {required:true,message:'请再次输入密码',trigger: 'blur'},
+              {min:5,max:12,message:'密码不匹配',trigger: 'blur'}
           ]
-      }
+        }
     }
   },
   methods:{
       submitForm:function(name){
           this.$refs[name].validate((valid) => {
             if(valid){
-                this.$api.post(this.urls + 'login',this.ruleForm,res=>{
-                    if(res.code==0){
-                        this.$message({
-                            message: res.message,
-                            type: 'success'
-                        });
-                        sessionStorage.setItem('loginState','1')
-                        this.$router.push('/')
-                    }else{
-                        this.$message({
-                            message: res.message,
-                            type: 'error'
-                        });
-                    }
+                this.$api.post( this.urls + 'signUp',this.ruleForm,res=>{
+                    // sessionStorage.setItem('loginState','1')
+                    this.$router.push('/login')
                 })
             }else{
-                 this.$message({
-                    message: res.message,
-                    type: 'error'
-                });
+                console.log('登录失败')
             }
           })
           
       },
       signUp:function(){
-          this.$router.push("/signUp")
+          console.log("注册")
       }
   }
 }

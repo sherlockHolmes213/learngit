@@ -46,7 +46,7 @@ export default {
   },
   methods:{
       initLeftNav:function(){
-          let routers = this.$router.options.routes[1]; // 获取路由对象
+          let routers = this.$router.options.routes[2]; // 获取路由对象
           let _this = this 
            _this.LeftNavList =[]
           routers.children.forEach(function(value,index){

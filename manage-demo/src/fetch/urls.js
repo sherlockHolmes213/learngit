@@ -1,9 +1,9 @@
 
-var inhibiUrl = 'http://58.87.110.60:9090/mc/inhibition';
+var inhibiUrl = 'http://127.0.0.1:5000/flaskDemo/';
 
 
-const iamsURL = {
+const URLS = {
     inhibiUrl
 };
 
-export default iamsURL;
+export default URLS;

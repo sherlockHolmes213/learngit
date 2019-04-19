@@ -5,6 +5,7 @@ import HomeTwo from '@/components/homeTwo'
 import TopNav from '@/components/topNav'  //顶部导航
 import LeftNav from '@/components/leftNav'  //左侧导航
 import Login from '@/components/login'  //登录页
+import SignUp from '@/components/signUp'  //注册页
 import HomeOne from '@/view/pages/home/homeOne'  //主页分级
 import MySet from '@/view/pages/mySet/mySet'  //我的设置
 import MySetOne from '@/view/pages/mySet/mySetOne'  //我的设置
@@ -115,6 +116,11 @@ export default new Router({
       path:'/login',
       name:'登录',
       component:Login
+    },
+    {
+      path:'/signUp',
+      name:'注册',
+      component:SignUp
     },
     {
       path:'/',
