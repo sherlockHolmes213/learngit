@@ -80,13 +80,14 @@ export default {
       }
   },
   mounted(){
-    this.$refs.leftNav.$el.style.height = window.innerHeight-60 + 'px'
+    // this.$refs.leftNav.$el.style.height = window.innerHeight-60 + 'px'
   }
 }
 </script>
 <style>
   .leftNav{
-    height: 100%
+    height: 100%;
+    background-color: rgb(84, 92, 100)
   }
   .el-submenu .el-menu-item{
     min-width: auto;

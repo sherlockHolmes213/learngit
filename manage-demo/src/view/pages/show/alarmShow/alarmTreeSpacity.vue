@@ -1,6 +1,16 @@
 <template>
   <div class="alarmTreeSpacity">
-      {{msg}}111    
+      <el-upload
+        ref="upload"
+        :action="this.fileUrl"           
+        :on-remove="handleRemove"
+        :file-list="fileList"
+        list-type="picture"
+        :auto-upload="false">
+        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+      </el-upload>
   </div>
 </template>
 
@@ -9,8 +19,17 @@ export default {
   name: 'alarmTreeSpacity',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js alarmTreeSpacity'
+      fileList:[],
+      fileUrl:URLS.fileUrl,
     }
+  },
+  methods:{
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    submitUpload() {
+      this.$refs.upload.submit();
+    },
   }
 }
 </script>

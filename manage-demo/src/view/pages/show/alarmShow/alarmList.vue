@@ -53,7 +53,7 @@ export default {
   name: 'alarmList',
   data () {
     return {
-      urls:URLS.inhibiUrl,
+      cityUrl:URLS.cityUrl,
       tableData:[],
       currentPage:1,
       pageSize:10,
@@ -65,7 +65,7 @@ export default {
   },
   methods:{
       getTableData(){
-        this.$api.get( this.urls + 'getCity',this.pageCong,res=>{
+        this.$api.get( this.cityUrl + 'getCity',this.pageCong,res=>{
             if(res.code == 0){
               this.tableData = res.data
               this.$message({
@@ -81,7 +81,7 @@ export default {
         })
       },
       handleDelete(id){
-        this.$api.delete( this.urls + 'deleteCityById',{'id':id},res=>{
+        this.$api.delete( this.cityUrl + 'deleteCityById',{'id':id},res=>{
             if(res.code == 0){
               this.$message({
                 message: res.message,

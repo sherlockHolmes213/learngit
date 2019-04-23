@@ -5,7 +5,7 @@
         <div class="grid-content bg-purple">
         </div>
      </el-col>
-      <el-col :span="18">
+      <el-col :span="21">
         <div class="grid-content bg-purple-light">
           <router-view/>
         </div>

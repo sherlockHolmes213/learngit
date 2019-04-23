@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-      <canvas id="c_n9" width="1920" height="990" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas>
+      <!-- <canvas id="c_n9" width="1920" height="990" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas> -->
       <el-row class="loginModal">
           <el-col :span="8" :offset="8">
               <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -22,13 +22,13 @@
 </template>
 
 <script>
-import canvas from '../common/canvasA'
+// import canvas from '../common/canvasA'
 import URLS from '@/fetch/urls.js'
 export default {
   name: 'mySetOne', 
   data () {
     return {
-      urls:URLS.inhibiUrl,
+      userUrl:URLS.userUrl,
       ruleForm:{
           name:'',
           password:''
@@ -45,7 +45,7 @@ export default {
       submitForm:function(name){
           this.$refs[name].validate((valid) => {
             if(valid){
-                this.$api.post(this.urls + 'login',this.ruleForm,res=>{
+                this.$api.post(this.userUrl + 'login',this.ruleForm,res=>{
                     if(res.code==0){
                         this.$message({
                             message: res.message,
